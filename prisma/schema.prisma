@@ -1,0 +1,57 @@
+// Prisma Schema for Cyber Hygiene Field Survey
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model SurveyResponse {
+  id                            String   @id @default(cuid())
+  isDemo                        Boolean  @default(false)
+  
+  // Section A: Demographics
+  respondentType                String   // "Student" | "Faculty/Staff"
+  ageGroup                      String   // "Below 18", "18–20", "21–25", "26–35", "36–45", "46+", "Prefer not to say"
+  academicArea                  String   // "IT/Computer", "Commerce/Management", "Science", "Arts/Humanities", "Other", "Prefer not to say"
+  gender                        String?  // "Male", "Female", "Other", "Prefer not to say"
+
+  // Section B: Password Security
+  passwordPractice              String   // Q4: Different passwords for important accounts
+  passwordChangeBehavior        String   // Q5: Password change frequency on suspected compromise
+  passwordManager               String   // Q6: Password manager usage
+
+  // Section C: Multi-Factor Authentication
+  mfaUsage                      String   // Q7: Two-factor / multi-factor authentication
+
+  // Section D: Device Security
+  softwareUpdates               String   // Q8: OS and application updates
+  deviceLock                    String   // Q9: Device screen lock / PIN / biometrics
+  antivirusUsage                String   // Q10: Antivirus or built-in protection
+
+  // Section E: Phishing and Online Threats
+  linkVerification              String   // Q11: Check source before clicking links
+  suspiciousMessageExperience   String   // Q12: Encountered suspicious email/message
+  suspiciousMessageAction       String   // Q13: Typical action on suspicious message
+  phishingConfidence            String   // Q14: Confidence identifying phishing
+
+  // Section F: Network and Data Safety
+  publicWifiUsage               String   // Q15: Frequency using public Wi-Fi
+  publicWifiSensitiveAccounts   String   // Q16: Avoid sensitive accounts on public Wi-Fi
+  backupFrequency               String   // Q17: Backup frequency for important files
+  httpsVerification             String   // Q18: Verify HTTPS/security before entering data
+
+  // Section G: Awareness & Training
+  cyberTraining                 String   // Q19: Formal training in past 12 months
+  overallAwareness              String   // Q20: Self-rated awareness
+  learningInterest              String?  // Q21: Topic to learn more about
+
+  // Computed Scores
+  cyberHygieneScore             Float    // 0 to 100
+  scoreCategory                 String   // "Needs Improvement" | "Basic" | "Good" | "Strong"
+
+  createdAt                     DateTime @default(now())
+}
