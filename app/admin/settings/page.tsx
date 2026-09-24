@@ -157,7 +157,7 @@ export default function SettingsPage() {
             </div>
 
             <div className="p-4 rounded-xl bg-emerald-50/70 border border-emerald-200">
-              <div className="text-xs text-emerald-800 font-medium">Authentic Field Records</div>
+              <div className="text-xs text-emerald-800 font-medium">Live Assessment Records</div>
               <div className="text-2xl font-bold text-emerald-950 mt-1">
                 {loading ? '...' : report?.realCount}
               </div>
@@ -171,7 +171,7 @@ export default function SettingsPage() {
                 Purge Demonstration Records
               </div>
               <p className="text-xs text-slate-500 mt-0.5 max-w-xl">
-                Permanently wipes all synthetic records (`isDemo: true`) prior to collecting authentic field survey submissions. Authentic student and faculty assessments will not be deleted.
+                Permanently wipes all synthetic records (`isDemo: true`) prior to collecting live assessment submissions. Real student and faculty assessments will not be deleted.
               </p>
             </div>
 

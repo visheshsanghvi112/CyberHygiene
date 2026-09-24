@@ -60,7 +60,7 @@ export default function ReportsPage() {
             Cyber Hygiene Assessment Report
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Generate and print publication-ready empirical security posture assessment reports.
+            Generate and print publication-ready security posture assessment reports.
           </p>
         </div>
 
@@ -148,7 +148,7 @@ export default function ReportsPage() {
               1. Executive Summary
             </h2>
             <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
-              This report presents an empirical evaluation of cybersecurity behavioral compliance gathered across collegiate student and faculty/staff cohorts. Utilizing a 21-factor assessment instrument and a normalized 0–100 Cyber Hygiene Scoring Engine, the evaluated sample yielded a mean Cyber Hygiene Score of <strong>{report.overallStats.mean} / 100</strong> (SD = {report.overallStats.stdDev}, Median = {report.overallStats.median}). While baseline compliance is robust in physical screen locking ({report.practiceRankings.find(p => p.practiceName.includes('Lock'))?.positiveResponsePercentage || 94}%) and multi-factor authentication enrollment ({report.facultyMetrics.mfaAdoptionRate}%), significant institutional vulnerabilities are present in routine file backup protocols ({report.practiceRankings.find(p => p.practiceName.includes('Backup'))?.positiveResponsePercentage || 37}%) and dedicated password manager adoption ({report.practiceRankings.find(p => p.practiceName.includes('Password Manager'))?.positiveResponsePercentage || 21}%).
+              This report presents an analytical evaluation of cybersecurity behavioral compliance evaluated across collegiate student and faculty/staff cohorts. Utilizing a 21-factor assessment instrument and a normalized 0–100 Cyber Hygiene Scoring Engine, the evaluated sample yielded a mean Cyber Hygiene Score of <strong>{report.overallStats.mean} / 100</strong> (SD = {report.overallStats.stdDev}, Median = {report.overallStats.median}). While baseline compliance is robust in physical screen locking ({report.practiceRankings.find(p => p.practiceName.includes('Lock'))?.positiveResponsePercentage || 94}%) and multi-factor authentication enrollment ({report.facultyMetrics.mfaAdoptionRate}%), significant institutional vulnerabilities are present in routine file backup protocols ({report.practiceRankings.find(p => p.practiceName.includes('Backup'))?.positiveResponsePercentage || 37}%) and dedicated password manager adoption ({report.practiceRankings.find(p => p.practiceName.includes('Password Manager'))?.positiveResponsePercentage || 21}%).
             </p>
           </div>
 

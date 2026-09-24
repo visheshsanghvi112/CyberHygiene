@@ -23,7 +23,7 @@ export default function AboutPage() {
           About the Cyber Hygiene Intelligence & Assessment System
         </h1>
         <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed">
-          An empirical cybersecurity behavioral evaluation and analytics platform developed as a final year undergraduate Information Technology project.
+          A comprehensive cybersecurity behavioral evaluation and analytics platform developed as a final year undergraduate Information Technology project.
         </p>
       </div>
 
@@ -92,7 +92,7 @@ export default function AboutPage() {
           </p>
           <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
             <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
-              <strong className="text-slate-900 block mb-1">Empirical Assessment</strong>
+              <strong className="text-slate-900 block mb-1">Systematic Assessment</strong>
               <span className="text-slate-500">Collect self-reported behavioral compliance across 6 key cybersecurity domains.</span>
             </div>
             <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
