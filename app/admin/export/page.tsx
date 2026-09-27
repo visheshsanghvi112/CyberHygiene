@@ -14,95 +14,95 @@ export default function AdminExportPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       {/* Page Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
         <div>
-          <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-md mb-1.5">
+          <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-md mb-1.5">
             <Database className="w-3.5 h-3.5" />
             <span>CIA v1.0 • Data Export & Interoperability</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-100">
             Data Export Center
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
             Download assessment records, analytics summaries, and compliance audit datasets in standard RFC-4180 CSV format.
           </p>
         </div>
 
         {/* Filter Selector */}
-        <div className="flex items-center gap-2 bg-white p-1 rounded-xl border border-slate-200 shadow-2xs self-start md:self-auto">
-          <Filter className="w-4 h-4 text-slate-400 ml-2" />
+        <div className="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-slate-800 shadow-2xs w-full sm:w-auto justify-between sm:justify-start">
+          <Filter className="w-4 h-4 text-slate-400 ml-2 hidden xs:block shrink-0" />
           {(['all', 'real', 'demo'] as const).map((mode) => (
             <button
               key={mode}
               onClick={() => setFilter(mode)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`flex-1 sm:flex-initial px-3 py-1.5 rounded-lg text-xs font-medium transition-all text-center ${
                 filter === mode
                   ? 'bg-slate-900 text-white shadow-2xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800'
               }`}
             >
               {mode === 'all' && 'All Records'}
-              {mode === 'real' && 'Real Data Only'}
+              {mode === 'real' && 'Real Only'}
               {mode === 'demo' && 'Demo Dataset'}
             </button>
           ))}
         </div>
       </div>
 
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {/* Card 1: Raw Anonymized Responses */}
-        <div className="academic-card flex flex-col justify-between">
+        <div className="intel-card p-4 sm:p-6 flex flex-col justify-between">
           <div>
-            <div className="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center mb-4">
+            <div className="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center mb-4">
               <Download className="w-5 h-5" />
             </div>
-            <h2 className="text-lg font-bold text-slate-900">
+            <h2 className="text-base sm:text-lg font-bold text-slate-100">
               Raw Assessment Records (CSV)
             </h2>
-            <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p className="mt-2 text-xs sm:text-sm text-slate-400 leading-relaxed">
               Downloads complete assessment entries line-by-line, including all question responses, calculated Cyber Hygiene Scores (0–100), categorical risk classifications, and anonymized audit IDs.
             </p>
-            <div className="mt-4 p-3 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600">
+            <div className="mt-4 p-3 rounded-lg bg-slate-900/60 border border-slate-800 text-xs text-slate-400">
               <strong>Format:</strong> RFC 4180 CSV • Compatible with Microsoft Excel, Google Sheets, SPSS, R, and Python pandas.
             </div>
           </div>
 
-          <div className="mt-6 pt-4 border-t border-slate-100">
+          <div className="mt-6 pt-4 border-t border-slate-800/80">
             <a
               href={`/api/admin/export?type=responses&filter=${filter}`}
               download
-              className="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs sm:text-sm shadow-xs transition-colors"
+              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-sky-600 hover:from-indigo-500 hover:to-sky-500 text-white shadow-md shadow-indigo-600/25 font-semibold text-xs sm:text-sm transition-colors text-center"
             >
-              <Download className="w-4 h-4" />
-              <span>Download Assessment Records ({filter.toUpperCase()})</span>
+              <Download className="w-4 h-4 shrink-0" />
+              <span>Download Records ({filter.toUpperCase()})</span>
             </a>
           </div>
         </div>
 
         {/* Card 2: Summary Statistics Report */}
-        <div className="academic-card flex flex-col justify-between">
+        <div className="intel-card p-4 sm:p-6 flex flex-col justify-between">
           <div>
-            <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center mb-4">
               <FileSpreadsheet className="w-5 h-5" />
             </div>
-            <h2 className="text-lg font-bold text-slate-900">
+            <h2 className="text-base sm:text-lg font-bold text-slate-100">
               Aggregated Analytics Summary (CSV)
             </h2>
-            <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p className="mt-2 text-xs sm:text-sm text-slate-400 leading-relaxed">
               Downloads pre-computed statistical tables including descriptive parameters (Mean, Median, SD, Min, Max), Student vs. Faculty comparative metrics, practice rankings, and Welch&apos;s t-test findings.
             </p>
-            <div className="mt-4 p-3 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600">
+            <div className="mt-4 p-3 rounded-lg bg-slate-900/60 border border-slate-800 text-xs text-slate-400">
               <strong>Format:</strong> Structured Multi-Section CSV Report ready for direct academic citation and project inclusion.
             </div>
           </div>
 
-          <div className="mt-6 pt-4 border-t border-slate-100">
+          <div className="mt-6 pt-4 border-t border-slate-800/80">
             <a
               href={`/api/admin/export?type=summary&filter=${filter}`}
               download
-              className="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs sm:text-sm shadow-xs transition-colors"
+              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-md shadow-emerald-600/25 font-semibold text-xs sm:text-sm transition-colors text-center"
             >
-              <Download className="w-4 h-4" />
+              <Download className="w-4 h-4 shrink-0" />
               <span>Download Analytics Summary ({filter.toUpperCase()})</span>
             </a>
           </div>
@@ -110,20 +110,20 @@ export default function AdminExportPage() {
       </div>
 
       {/* Assessment Data Schema & Dictionary */}
-      <div className="mt-12 academic-card">
-        <div className="border-b border-slate-100 pb-3 mb-4">
-          <h2 className="text-base font-bold text-slate-900">
+      <div className="mt-8 sm:mt-12 intel-card p-4 sm:p-6">
+        <div className="border-b border-slate-800/80 pb-3 mb-4">
+          <h2 className="text-base font-bold text-slate-100">
             Assessment Data Schema & Variable Dictionary
           </h2>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-400">
             Field specifications, data types, and scoring rubrics utilized in the assessment engine
           </p>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+          <table className="w-full text-left text-xs min-w-[600px]">
             <thead>
-              <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold uppercase tracking-wider">
+              <tr className="bg-slate-900/60 border-b border-slate-800 text-slate-400 font-semibold uppercase tracking-wider">
                 <th className="py-2.5 px-3">Field Variable</th>
                 <th className="py-2.5 px-3">Module Dimension</th>
                 <th className="py-2.5 px-3">Data Type</th>
@@ -131,7 +131,7 @@ export default function AdminExportPage() {
                 <th className="py-2.5 px-3">Permitted Values</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 text-slate-700">
+            <tbody className="divide-y divide-slate-800/80 text-slate-300">
               {[
                 {
                   var: 'respondentType',
@@ -204,12 +204,12 @@ export default function AdminExportPage() {
                   vals: 'Normalized total across 15 scored practices',
                 },
               ].map((row) => (
-                <tr key={row.var} className="hover:bg-slate-50">
-                  <td className="py-2 px-3 font-mono font-semibold text-indigo-700">{row.var}</td>
+                <tr key={row.var} className="hover:bg-slate-900/60">
+                  <td className="py-2 px-3 font-mono font-semibold text-indigo-400">{row.var}</td>
                   <td className="py-2 px-3">{row.dim}</td>
-                  <td className="py-2 px-3 text-slate-500">{row.type}</td>
-                  <td className="py-2 px-3 font-semibold text-slate-900">{row.score}</td>
-                  <td className="py-2 px-3 text-slate-600">{row.vals}</td>
+                  <td className="py-2 px-3 text-slate-400">{row.type}</td>
+                  <td className="py-2 px-3 font-semibold text-slate-100">{row.score}</td>
+                  <td className="py-2 px-3 text-slate-400">{row.vals}</td>
                 </tr>
               ))}
             </tbody>
