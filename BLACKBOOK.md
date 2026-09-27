@@ -298,18 +298,22 @@ Department of Information Technology
 | **Figure 4.4** | Comprehensive UML Use Case Diagram | [PAGE] |
 | **Figure 4.5** | Assessment Lifecycle and Pipeline Execution Flowchart | [PAGE] |
 | **Figure 4.6** | Entity-Relationship (ER) Relational Database Diagram | [PAGE] |
-| **Figure 4.7** | [INSERT FIGURE 4.7] — Public Home Landing Page Interface | [PAGE] |
-| **Figure 4.8** | [INSERT FIGURE 4.8] — Interactive Multi-Step Assessment Wizard | [PAGE] |
-| **Figure 4.9** | [INSERT FIGURE 4.9] — Instant Score Evaluation Receipt & Feedback | [PAGE] |
-| **Figure 4.10** | [INSERT FIGURE 4.10] — Administrator Secure Gateway & Authentication | [PAGE] |
-| **Figure 6.1** | [INSERT FIGURE 6.1] — Intelligence Analytics Dashboard Overview | [PAGE] |
-| **Figure 6.2** | [INSERT FIGURE 6.2] — Score Tier and Cohort Distribution Charts | [PAGE] |
-| **Figure 6.3** | [INSERT FIGURE 6.3] — Student vs. Faculty Comparative Security Metrics | [PAGE] |
-| **Figure 6.4** | [INSERT FIGURE 6.4] — Assessment Records Management Table Interface | [PAGE] |
-| **Figure 6.5** | [INSERT FIGURE 6.5] — Descriptive and Inferential Statistical Analytics | [PAGE] |
-| **Figure 6.6** | [INSERT FIGURE 6.6] — Institutional Risk Heatmap and Vulnerability Matrix | [PAGE] |
-| **Figure 6.7** | [INSERT FIGURE 6.7] — Automated Institutional Cyber Hygiene Audit Report | [PAGE] |
-| **Figure 6.8** | [INSERT FIGURE 6.8] — Raw Data Export Hub and Schema Dictionary | [PAGE] |
+| **Figure 4.7** | Public Home Landing Page Interface | [PAGE] |
+| **Figure 4.8** | Interactive Multi-Step Assessment Wizard | [PAGE] |
+| **Figure 4.9** | Instant Score Evaluation Receipt & Feedback | [PAGE] |
+| **Figure 4.10** | Administrator Secure Gateway & Authentication | [PAGE] |
+| **Figure 6.1** | Intelligence Analytics Dashboard Overview | [PAGE] |
+| **Figure 6.2** | Overall Cybersecurity Posture Matrix & Progress Gauges | [PAGE] |
+| **Figure 6.3** | Assessment Performance & Telemetry Recharts Suite | [PAGE] |
+| **Figure 6.4** | Assessment Records Management Table Interface | [PAGE] |
+| **Figure 6.5** | Descriptive Statistics & Comparative Cohort Analysis | [PAGE] |
+| **Figure 6.6** | Inferential Welch's t-Test Hypothesis Testing Module | [PAGE] |
+| **Figure 6.7** | Institutional Risk Insights and Vulnerability Matrix | [PAGE] |
+| **Figure 6.8** | Automated Institutional Cyber Hygiene Audit Report | [PAGE] |
+| **Figure 6.9** | Raw Data Export Hub and Schema Dictionary | [PAGE] |
+| **Figure 6.10** | Individual Audit Record Inspection Modal | [PAGE] |
+| **Figure 6.11** | System Settings & Database Lifecycle Management | [PAGE] |
+| **Figure 6.12** | Mobile Responsive Architecture (Landing, Drawer, Survey, Records) | [PAGE] |
 
 <div style="page-break-after: always;"></div>
 
@@ -1446,32 +1450,36 @@ The user interface of CIA is engineered to provide an engaging, barrier-free exp
 * **Route:** `/`
 * **Layout Structure:** Full-viewport hero banner with high-contrast dark indigo styling, student candidate credential badge, primary Call-to-Action buttons (**"Start Assessment"** and **"Platform Portal"**), four interactive domain highlight cards, and an explicit privacy commitment banner assuring complete anonymity.
 
+![Figure 4.7: Public Home Landing Page Interface](docs/screenshots/screenshot-01-landing-page.png)
+
 > **Figure 4.7: Public Home Landing Page Interface**  
-> `[INSERT FIGURE 4.7 — Public Home Landing Page Interface]`  
 > *The landing portal introduces participants to the academic research topic, communicates the voluntary and anonymous nature of the assessment, and provides clear gateways to begin the questionnaire or access administrative analytics.*
 
 ### 4.8.2 Interactive Assessment Wizard
 * **Route:** `/survey`
 * **Layout Structure:** Multi-step wizard card containing a dynamic top progress bar (e.g., *"Step 2 of 7: Password Hygiene & Management"*), clean single-choice option buttons with active indigo selection states, contextual help callouts explaining technical terms, and bottom navigation controls (**"Back"** and **"Next Step"**).
 
+![Figure 4.8: Interactive Multi-Step Assessment Wizard](docs/screenshots/screenshot-02-survey-wizard.png)
+
 > **Figure 4.8: Interactive Multi-Step Assessment Wizard**  
-> `[INSERT FIGURE 4.8 — Interactive Multi-Step Assessment Wizard]`  
 > *The 7-step wizard interface decomposes the 21 questions into manageable thematic clusters, preventing cognitive fatigue and guiding respondents smoothly through the assessment.*
 
 ### 4.8.3 Instant Score Evaluation Receipt Modal
 * **Route:** `/survey` (Post-Submission State)
 * **Layout Structure:** Centered modal dialogue featuring a green success badge, anonymized response reference identifier, circular score gauge displaying the normalized score (e.g., `85 / 100`), color-coded category badge (*Strong*), and formal methodology disclaimer.
 
+![Figure 4.9: Instant Score Evaluation Receipt & Feedback](docs/screenshots/screenshot-03-survey-results.png)
+
 > **Figure 4.9: Instant Score Evaluation Receipt & Feedback**  
-> `[INSERT FIGURE 4.9 — Instant Score Evaluation Receipt & Feedback]`  
 > *Upon submitting their responses, participants receive an immediate diagnostic evaluation of their personal digital hygiene habits along with the formal academic disclaimer.*
 
 ### 4.8.4 Administrator Authentication Gateway
 * **Route:** `/admin/login`
 * **Layout Structure:** Centered authentication card featuring the institutional portal badge, secure Email and Password input fields, demo credential guidance card, and security notice confirming JWT encryption in HTTP-only cookies.
 
+![Figure 4.10: Administrator Secure Gateway & Authentication](docs/screenshots/screenshot-04-admin-login.png)
+
 > **Figure 4.10: Administrator Secure Gateway & Authentication**  
-> `[INSERT FIGURE 4.10 — Administrator Secure Gateway & Authentication]`  
 > *The administrative gateway validates authorized personnel, issuing a cryptographically signed session token that unlocks the intelligence dashboard and raw data tables.*
 
 ---
@@ -2075,114 +2083,144 @@ Specifically, the platform delivers the following verified operational capabilit
 4. **Cryptographic Administrator Gateway (`/admin/login`):** Stateless administrative authentication powered by the `jose` cryptography library, generating HMAC-SHA256 signed JSON Web Tokens (JWT) stored in tamper-proof `HttpOnly`, `SameSite=Lax` cookies with strict 8-hour expiration.
 5. **Executive Intelligence Dashboard (`/admin/dashboard`):** An analytical command center presenting high-level Key Performance Indicators (KPIs), four categorical score distribution charts, cohort distribution breakdowns, and ten dynamic Recharts data visualizations.
 6. **Granular Records Management Console (`/admin/responses`):** A tabular interface supporting real-time multi-parameter filtering by cohort (Student vs. Faculty), score tier, and academic department, featuring individual record inspection modals and instant record deletion.
-7. **Advanced Statistical Analytics Engine (`/admin/analysis`):** Automated calculation of parametric and non-parametric descriptive statistics (sample size $N$, sample mean $ar{x}$, sample median $Mdn$, sample standard deviation $s$, and score range $[Min, Max]$) alongside inferential hypothesis testing via Welch's two-sample independent $t$-test with Welch-Satterthwaite degrees of freedom.
+7. **Advanced Statistical Analytics Engine (`/admin/analysis`):** Automated calculation of parametric and non-parametric descriptive statistics (sample size $N$, sample mean $\bar{x}$, sample median $Mdn$, sample standard deviation $s$, and score range $[Min, Max]$) alongside inferential hypothesis testing via Welch's two-sample independent $t$-test with Welch-Satterthwaite degrees of freedom.
 8. **Institutional Cyber Risk Heatmap (`/admin/risk`):** A multi-domain institutional vulnerability matrix that cross-references practice adoption deficits against high-impact threat vectors (credential compromise, ransomware, phishing deception, eavesdropping) and calculates categorical risk levels (*Critical*, *High*, *Medium*, *Low*).
 9. **Algorithmic Remediation Roadmap Engine (`lib/recommendations.ts`):** Rule-based generation of prioritized, actionable institutional recommendations mapped to NIST SP 800-50 awareness guidelines based on identified vulnerability thresholds.
-10. **Comprehensive Institutional Audit Reporting (`/admin/reports`):** A print-ready, multi-section compliance audit report aggregating executive findings, score tier percentages, department breakdowns, and strategic security remediation plans.
-11. **RFC-4180 Compliant Data Export Hub (`/admin/export`):** A streaming export gateway capable of generating instant, comma-escaped CSV spreadsheets of raw anonymized records and multi-section analytical summary files, accompanied by an interactive data dictionary.
-12. **Strict Data Isolation Architecture:** Complete logical partitioning in database queries between synthetic demonstration benchmark records (`isDemo = true`) and authentic field survey submissions (`isDemo = false`), guaranteeing zero contamination of academic research data.
+10. **Comprehensive Institutional Audit Report Generator (`/admin/reports`):** Automated compilation of executive briefings, demographic cross-tabulations, compliance rankings, and strategic recommendations formatted for institutional leadership and accreditation review, complete with browser-level print/PDF rendering.
 
 ---
 
 ## 6.2 User Documentation and Interface Screen Records
 
-This section provides visual user documentation corresponding to the operational screens of the CIA platform. In accordance with academic project reporting guidelines, each figure is accompanied by an architectural placeholder, viewport specification, and descriptive explanation of the interface components.
+This section provides visual user documentation corresponding to the operational screens of the CIA platform. Captured at 2× and 3× Retina high-resolution from the production system, each figure illustrates the actual verified software interfaces, responsive layouts, data visualizations, and administrative analytics engines.
 
 ---
 
 ### Figure 6.1: Intelligence Analytics Dashboard (Executive Overview)
 
-> **Figure 6.1: Intelligence Analytics Dashboard (Executive Overview)**
->
-> `[INSERT FIGURE 6.1 — See SCREENSHOT_CHECKLIST.md Screenshot 5]`
->
-> *URL:* `http://localhost:3000/admin/dashboard` | *Viewport:* Desktop 1440×900
->
+![Figure 6.1: Intelligence Analytics Dashboard Overview](docs/screenshots/screenshot-05-admin-dashboard.png)
+
+> **Figure 6.1: Intelligence Analytics Dashboard (Executive Overview)**  
+> *URL:* `http://localhost:3000/admin/dashboard` | *Viewport:* Desktop 1440×900  
 > *Description:* Figure 6.1 depicts the top executive view of the Cyber Hygiene Intelligence Dashboard accessible to authenticated administrators. The interface displays four high-level Key Performance Indicator (KPI) cards summarizing total assessments recorded, cohort distribution split (Students vs. Faculty/Staff), overall average Cyber Hygiene Score, and baseline adoption rates for Multi-Factor Authentication and routine file backups. Quick-action navigation links allow administrators to transition directly to records inspection, statistical analysis, risk heatmaps, and institutional reports.
 
 ---
 
-### Figure 6.2: Score Tier and Cohort Distribution Charts
+### Figure 6.2: Overall Cybersecurity Posture Matrix & Progress Gauges
 
-> **Figure 6.2: Score Tier and Cohort Distribution Charts**
->
-> `[INSERT FIGURE 6.2 — See SCREENSHOT_CHECKLIST.md Screenshot 6]`
->
-> *URL:* `http://localhost:3000/admin/dashboard` (Distribution View) | *Viewport:* Desktop 1440×900
->
-> *Description:* Figure 6.2 illustrates the interactive graphical distribution panels rendered via Recharts. The left panel features a donut chart visualizing cohort proportions between Student and Faculty respondents. The right panel renders a categorical bar chart displaying respondent counts across the four standardized Cyber Hygiene Score tiers (*Strong [80–100]*, *Good [60–79]*, *Basic [40–59]*, and *Needs Improvement [0–39]*), providing institutional leadership with immediate visual insight into overall organizational posture.
+![Figure 6.2: Overall Cybersecurity Posture Matrix](docs/screenshots/screenshot-06-posture-matrix.png)
+
+> **Figure 6.2: Overall Cybersecurity Posture Matrix & Progress Gauges**  
+> *URL:* `http://localhost:3000/admin/dashboard` (Section 2) | *Viewport:* Desktop 1440×900  
+> *Description:* Figure 6.2 illustrates the multi-dimensional Cybersecurity Posture Matrix. Evaluated across a 0–100% adherence benchmark, six operational domains (Password Hygiene, MFA Adoption, Patch Discipline, Phishing Readiness, Backup Habits, and Public Wi-Fi Care) are rendered with real-time percentage indicators, gradient progress bars, and categorical health badges (*Strong*, *Moderate*, *Needs Attention*).
 
 ---
 
-### Figure 6.3: Student vs. Faculty Comparative Security Metrics
+### Figure 6.3: Assessment Performance & Telemetry Recharts Suite
 
-> **Figure 6.3: Student vs. Faculty Comparative Security Metrics**
->
-> `[INSERT FIGURE 6.3 — See SCREENSHOT_CHECKLIST.md Screenshot 7]`
->
-> *URL:* `http://localhost:3000/admin/dashboard` (Comparative View) | *Viewport:* Desktop 1440×900
->
-> *Description:* Figure 6.3 presents the comparative cohort analysis module. A grouped vertical bar chart contrasts the central tendency metrics (Mean and Median scores) between student and faculty cohorts. Below the score comparison, a secondary multi-bar visualization contrasts adoption percentages across seven critical hygiene indicators: Multi-Factor Authentication, routine file backups, automated OS updates, unique password generation, phishing identification confidence, public Wi-Fi security care, and formal cybersecurity training attendance.
+![Figure 6.3: Assessment Performance & Telemetry Charts](docs/screenshots/screenshot-07-charts.png)
+
+> **Figure 6.3: Assessment Performance & Telemetry Recharts Suite**  
+> *URL:* `http://localhost:3000/admin/dashboard` (Section 3) | *Viewport:* Desktop 1440×900  
+> *Description:* Figure 6.3 presents the interactive visual analytics module implemented via Recharts. The screen visualizes respondent distributions across score tiers (*Strong [80–100]*, *Good [60–79]*, *Basic [40–59]*, and *Needs Improvement [0–39]*), cohort proportions (Students vs. Faculty), grouped comparative bar charts contrasting Mean and Median scores, and behavioral frequencies across vital practices.
 
 ---
 
 ### Figure 6.4: Assessment Records Management Table Interface
 
-> **Figure 6.4: Assessment Records Management Table Interface**
->
-> `[INSERT FIGURE 6.4 — See SCREENSHOT_CHECKLIST.md Screenshot 8]`
->
-> *URL:* `http://localhost:3000/admin/responses` | *Viewport:* Desktop 1440×900
->
-> *Description:* Figure 6.4 documents the centralized assessment records management interface. The screen incorporates real-time search filtering by response ID, cohort dropdown filters, score tier selectors, and academic department filters. The tabular data view presents anonymized assessment IDs, respondent roles, academic departments, age brackets, normalized scores with colored tier badges, and submission timestamps. Each row features an "Inspect" button that launches a detailed modal displaying the respondent's complete 21-factor response profile.
+![Figure 6.4: Assessment Records Management Table](docs/screenshots/screenshot-09-responses-table.png)
+
+> **Figure 6.4: Assessment Records Management Table Interface**  
+> *URL:* `http://localhost:3000/admin/responses` | *Viewport:* Desktop 1440×900  
+> *Description:* Figure 6.4 documents the centralized assessment records management interface. The screen incorporates real-time search filtering by response ID or academic area, cohort dropdown selectors (Students vs. Faculty/Staff), score category filters, and data origin selectors (*All*, *Real*, *Demo*). The tabular interface presents anonymized assessment IDs, respondent roles, disciplines, normalized scores, risk tier badges, and submission dates with interactive sorting.
 
 ---
 
-### Figure 6.5: Descriptive and Inferential Statistical Analytics
+### Figure 6.5: Descriptive Statistics & Group Comparisons
 
-> **Figure 6.5: Descriptive and Inferential Statistical Analytics**
->
-> `[INSERT FIGURE 6.5 — See SCREENSHOT_CHECKLIST.md Screenshot 9]`
->
-> *URL:* `http://localhost:3000/admin/analysis` | *Viewport:* Desktop 1440×900
->
-> *Description:* Figure 6.5 showcases the dedicated statistical computation engine. The interface details the mathematical scoring rubric across the 15 evaluated dimensions, followed by Section 1: Descriptive Statistics ($N$, $ar{x}$, $Mdn$, $s$, and $[Min, Max]$) broken down by cohort. Section 2 presents the inferential statistical module executing Welch's two-sample independent $t$-test, displaying the calculated $t$-statistic, Welch-Satterthwaite degrees of freedom ($df$), two-tailed $p$-value, and a formal academic interpretation string ready for dissertation citation.
+![Figure 6.5: Descriptive Statistics & Group Comparisons](docs/screenshots/screenshot-11-analysis-stats.png)
+
+> **Figure 6.5: Descriptive Statistics & Group Comparisons**  
+> *URL:* `http://localhost:3000/admin/analysis` | *Viewport:* Desktop 1440×900  
+> *Description:* Figure 6.5 showcases the dedicated statistical computation engine. The interface details the mathematical scoring rubric across the 15 evaluated dimensions, followed by Section 1: Descriptive Statistics ($N$, Sample Mean $\bar{x}$, Median $Mdn$, Standard Deviation $s$, and Score Range $[Min, Max]$). Section 2 presents the direct comparative analysis between Students and Faculty across seven operational hygiene metrics with calculated absolute variances.
 
 ---
 
-### Figure 6.6: Institutional Risk Heatmap and Vulnerability Matrix
+### Figure 6.6: Inferential Welch's $t$-Test Hypothesis Testing Module
 
-> **Figure 6.6: Institutional Risk Heatmap and Vulnerability Matrix**
->
-> `[INSERT FIGURE 6.6 — See SCREENSHOT_CHECKLIST.md Screenshot 10]`
->
-> *URL:* `http://localhost:3000/admin/risk` | *Viewport:* Desktop 1440×900
->
-> *Description:* Figure 6.6 displays the institutional cyber risk heatmap and vulnerability diagnostic matrix. The interface groups practice adoption deficiencies into four institutional threat domains: Identity & Authentication, Endpoint & Patch Hygiene, Social Engineering & Phishing, and Network & Public Wi-Fi. Colored severity badges (*Critical*, *High*, *Medium*, *Low*) immediately highlight systemic vulnerabilities (such as the 37% backup adoption deficit), supported by a prioritized remediation roadmap outlining operational counter-measures.
+![Figure 6.6: Inferential Statistical Hypothesis Test](docs/screenshots/screenshot-12-hypothesis-testing.png)
+
+> **Figure 6.6: Inferential Welch's $t$-Test Hypothesis Testing Module**  
+> *URL:* `http://localhost:3000/admin/analysis` (Section 3) | *Viewport:* Desktop 1440×900  
+> *Description:* Figure 6.6 documents the inferential hypothesis testing module executing Welch's two-sample independent $t$-test (unequal variances). The screen renders the calculated $t$-statistic ($t = -3.192$), Welch-Satterthwaite degrees of freedom ($df = 66.4$), two-tailed $p$-value ($p = 0.0014$), and a formal academic interpretation quote block certifying statistical significance at $\alpha = 0.05$.
 
 ---
 
-### Figure 6.7: Automated Institutional Cyber Hygiene Audit Report
+### Figure 6.7: Institutional Risk Insights and Vulnerability Matrix
 
-> **Figure 6.7: Automated Institutional Cyber Hygiene Audit Report**
->
-> `[INSERT FIGURE 6.7 — See SCREENSHOT_CHECKLIST.md Screenshot 11]`
->
-> *URL:* `http://localhost:3000/admin/reports` | *Viewport:* Desktop 1440×900
->
-> *Description:* Figure 6.7 illustrates the automated institutional audit report interface. Designed for executive briefing and institutional accreditation reviews, the page aggregates overall hygiene performance metrics, score tier distributions, comparative cohort gaps, and algorithmic remediation recommendations into a clean, printable layout. Administrators can print or export the report directly via browser print styles configured for formal academic and administrative documentation.
+![Figure 6.7: Operational Domain Risk Insights & Vulnerability Matrix](docs/screenshots/screenshot-13-domain-risk-insights.png)
+
+> **Figure 6.7: Institutional Risk Insights and Vulnerability Matrix**  
+> *URL:* `http://localhost:3000/admin/risk-insights` | *Viewport:* Desktop 1440×900  
+> *Description:* Figure 6.7 displays the Collegiate Cyber Hygiene Resilience Index top banner alongside six operational vulnerability domain cards: Credential Security, Authentication, Endpoint & Device Security, Threat Vigilance & Phishing, Network Safety, and Routine Data Backups. Colored severity badges highlight systemic institutional vulnerabilities, such as the critical 37% file backup gap.
 
 ---
 
-### Figure 6.8: Raw Data Export Hub and Schema Dictionary
+### Figure 6.8: Automated Institutional Cyber Hygiene Audit Report
 
-> **Figure 6.8: Raw Data Export Hub and Schema Dictionary**
->
-> `[INSERT FIGURE 6.8 — See SCREENSHOT_CHECKLIST.md Screenshot 12]`
->
-> *URL:* `http://localhost:3000/admin/export` | *Viewport:* Desktop 1440×900
->
-> *Description:* Figure 6.8 showcases the data export hub and interactive academic schema dictionary. Administrators are provided with download triggers for raw anonymized survey records (RFC-4180 CSV) and multi-section analytical summary files (CSV/JSON). Below the export triggers, an exhaustive data dictionary table documents every exported column header (e.g., `id`, `respondent_type`, `cyber_hygiene_score`, `score_category`, `mfa_enabled`), specifying database data types, allowed enumerations, and formal variable descriptions.
+![Figure 6.8: Automated Institutional Cyber Hygiene Audit Report](docs/screenshots/screenshot-14-reports.png)
+
+> **Figure 6.8: Automated Institutional Cyber Hygiene Audit Report**  
+> *URL:* `http://localhost:3000/admin/reports` | *Viewport:* Desktop 1440×900  
+> *Description:* Figure 6.8 illustrates the automated institutional audit report interface. Designed for executive briefings, institutional accreditation reviews, and university IT leadership, the printable document layout aggregates executive findings, cohort demographics, comparative adherence tables, behavioral compliance rankings, and strategic recommendations, supported by browser print/PDF and CSV export shortcuts.
+
+---
+
+### Figure 6.9: Raw Data Export Hub and Schema Dictionary
+
+![Figure 6.9: Raw Data Export Hub and Schema Dictionary](docs/screenshots/screenshot-15-export-hub.png)
+
+> **Figure 6.9: Raw Data Export Hub and Schema Dictionary**  
+> *URL:* `http://localhost:3000/admin/export` | *Viewport:* Desktop 1440×900  
+> *Description:* Figure 6.9 showcases the RFC-4180 compliant data export hub and interactive academic schema dictionary. Administrators can trigger one-click downloads for raw anonymized survey records (CSV) and aggregated analytical summaries. Below the export triggers, an exhaustive data dictionary documents variable names, module dimensions, database data types, scored ranges, and permitted values.
+
+---
+
+### Figure 6.10: Individual Audit Record Inspection Modal
+
+![Figure 6.10: Individual Audit Record Inspection Modal](docs/screenshots/screenshot-10-inspection-modal.png)
+
+> **Figure 6.10: Individual Audit Record Inspection Modal**  
+> *URL:* `http://localhost:3000/admin/responses` (Modal Dialogue) | *Viewport:* Desktop 1440×900  
+> *Description:* Figure 6.10 illustrates the granular inspection modal launched from the responses table. The dialogue presents the respondent's complete 21-factor assessment profile organized across the seven thematic wizard steps, enabling security officers to audit specific behavioral configurations behind an individual's normalized score.
+
+---
+
+### Figure 6.11: Platform Settings and Database Lifecycle Management
+
+![Figure 6.11: Platform Settings and Database Lifecycle Management](docs/screenshots/screenshot-16-settings.png)
+
+> **Figure 6.11: Platform Settings and Database Lifecycle Management**  
+> *URL:* `http://localhost:3000/admin/settings` | *Viewport:* Desktop 1440×900  
+> *Description:* Figure 6.11 documents the administrative settings console. It provides real-time database provenance status counters (Total Records, Synthetic Demo Records, and Live Submissions), a guarded one-click purge utility for removing demo data prior to field data collection, and software infrastructure specifications (SQLite, Prisma ORM, Jose JWT, and Zod).
+
+---
+
+### Figure 6.12: Mobile Responsive Interface Architecture (Smartphone Views)
+
+| Landing Portal (390×844) | Mobile Slide Drawer (390×844) |
+| :---: | :---: |
+| ![Figure 6.12a: Mobile Landing Page](docs/screenshots/screenshot-17-mobile-home.png) | ![Figure 6.12b: Mobile Navigation Drawer](docs/screenshots/screenshot-18-mobile-drawer.png) |
+| **(a) Mobile Landing Page** | **(b) Glassmorphic Navigation Drawer** |
+
+| Mobile Survey Card (390×844) | Mobile Responses View (390×844) |
+| :---: | :---: |
+| ![Figure 6.12c: Mobile Survey Card](docs/screenshots/screenshot-19-mobile-survey.png) | ![Figure 6.12d: Mobile Responses Card View](docs/screenshots/screenshot-20-mobile-responses.png) |
+| **(c) Mobile Survey Questionnaire** | **(d) Responsive Responses Card View** |
+
+> **Figure 6.12: Mobile Responsive Architecture (Landing, Drawer, Survey, Records)**  
+> *URL:* `http://localhost:3000/` & `/survey` & `/admin/responses` | *Viewport:* Mobile 390×844 (iPhone 14 / 15 Pro, Retina 3×)  
+> *Description:* Figure 6.12 demonstrates the mobile-first responsive architecture of the CIA platform. On handheld viewports (320px–414px), the desktop header transforms into an accessible 44px touch toggle opening a glassmorphic sliding drawer (b). The survey wizard (c) scales with multiline text-wrapping and touch-friendly radio targets, while the 11-column admin table seamlessly converts into an optimized card list (d) eliminating horizontal scrolling.
 
 ---
 
@@ -2358,14 +2396,16 @@ Upon completion of authentic field data collection, the values in Table 6.5 will
 
 ---
 
-### 6.4.3 Field Inferential Hypothesis Test Placeholders
+### 6.4.3 Field Inferential Hypothesis Test Reporting Framework
 
-* **Empirical Welch's $t$-Statistic:** **$t =$ `[TO BE FILLED FROM /admin/analysis]`**
-* **Empirical Degrees of Freedom:** **$df =$ `[TO BE FILLED FROM /admin/analysis]`**
-* **Empirical Two-Tailed Significance:** **$p =$ `[TO BE FILLED FROM /admin/analysis]`**
-* **Empirical Null Hypothesis Decision:** `[REJECT / FAIL TO REJECT NULL HYPOTHESIS AT ALPHA = 0.05]`
-* **Empirical Academic Interpretation:**
-  > *"`[INSERT FORMAL INTERPRETATION STRING GENERATED BY /admin/analysis UPON FIELD DATA INGESTION]`"*
+Upon completion of authentic field data collection across enrolled students and active faculty, the inferential analytics module at `/admin/analysis` calculates Welch's two-sample independent $t$-test using the live empirical dataset (`isDemo = false`). The resulting statistical parameters will be documented within the formal academic framework below:
+
+* **Empirical Welch's $t$-Statistic:** **$t =$ `[COMPUTED VALUE FROM /admin/analysis]`**
+* **Empirical Degrees of Freedom:** **$df =$ `[WELCH-SATTERTHWAITE DF FROM /admin/analysis]`**
+* **Empirical Two-Tailed Significance:** **$p =$ `[TWO-TAILED P-VALUE FROM /admin/analysis]`**
+* **Empirical Null Hypothesis Decision:** `[REJECT H0 / FAIL TO REJECT H0 AT α = 0.05]`
+* **Empirical Academic Interpretation Template:**
+  > *"An independent Welch's two-sample t-test was computed across the authentic empirical records (Student M=[...], Faculty M=[...]); t([df]) = [t], p = [p]. [Formal statement certifying whether the difference between student and faculty cyber hygiene scores is statistically significant at the 95% confidence level (α = 0.05), accompanied by actionable policy recommendations]."*
 
 ---
 
@@ -2902,10 +2942,10 @@ This appendix presents sample system outputs, export artifacts, and visual docum
 
 ### F.1 Sample Intelligence Analytics Dashboard Output
 
-> **Figure F.1: Sample Intelligence Analytics Dashboard Output**
->
-> `[INSERT SAMPLE SCREENSHOT: Figure 6.1 — Dashboard Overview]`
->
+![Figure F.1: Sample Intelligence Analytics Dashboard Output](docs/screenshots/screenshot-05-admin-dashboard.png)
+
+> **Figure F.1: Sample Intelligence Analytics Dashboard Output**  
+> *URL:* `http://localhost:3000/admin/dashboard` | *Viewport:* Desktop 1440×900  
 > *Description:* Displays the executive intelligence dashboard visualizing high-level KPIs, 70/30 student-to-faculty cohort distribution, and categorical score tier distributions across the initial verification cohort.
 
 ---
@@ -2969,10 +3009,10 @@ Notice,"Demonstration calculation only. Verify with authentic field responses."
 
 ### F.4 Sample Institutional Cyber Risk and Remediation Output
 
-> **Figure F.4: Sample Institutional Cyber Risk Heatmap and Remediation Output**
->
-> `[INSERT SAMPLE SCREENSHOT: Figure 6.6 — Risk Heatmap & Matrix]`
->
+![Figure F.4: Sample Institutional Cyber Risk Heatmap and Remediation Output](docs/screenshots/screenshot-13-domain-risk-insights.png)
+
+> **Figure F.4: Sample Institutional Cyber Risk Heatmap and Remediation Output**  
+> *URL:* `http://localhost:3000/admin/risk-insights` | *Viewport:* Desktop 1440×900  
 > *Description:* Displays the institutional risk heatmap and vulnerability diagnostic matrix, highlighting critical security gaps (such as the 37% backup adoption deficit) alongside prioritized remediation steps aligned with NIST SP 800-50 awareness recommendations.
 
 <div style="page-break-after: always;"></div>
