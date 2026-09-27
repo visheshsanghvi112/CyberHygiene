@@ -122,8 +122,13 @@ export function DashboardCharts({ charts }: ChartProps) {
           <div className="h-64 w-full min-w-0">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={charts.scoreDistribution} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
-                <XAxis dataKey="category" stroke="#475569" tick={{ fill: '#94a3b8', fontSize: 10 }} interval={0} />
+                <XAxis
+                  dataKey="category"
+                  stroke="#475569"
+                  tick={{ fill: '#94a3b8', fontSize: 10 }}
+                  interval={0}
+                  tickFormatter={(val) => (val === 'Needs Improvement' ? 'Needs Imp.' : val)}
+                />
                 <YAxis allowDecimals={false} stroke="#475569" tick={{ fill: '#94a3b8', fontSize: 11 }} />
                 <Tooltip {...customTooltip} />
                 <Bar dataKey="count" fill="#4f46e5" radius={[6, 6, 0, 0]}>
@@ -313,7 +318,18 @@ export function DashboardCharts({ charts }: ChartProps) {
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={charts.phishingConfidence} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
-                <XAxis dataKey="name" stroke="#475569" tick={{ fill: '#94a3b8', fontSize: 10 }} />
+                <XAxis
+                  dataKey="name"
+                  stroke="#475569"
+                  tick={{ fill: '#94a3b8', fontSize: 10 }}
+                  interval={0}
+                  tickFormatter={(val) => {
+                    if (val === 'Not confident at all') return 'Not at all';
+                    if (val === 'Not very confident') return 'Not very';
+                    if (val === 'Very confident') return 'Very conf.';
+                    return val;
+                  }}
+                />
                 <YAxis allowDecimals={false} stroke="#475569" tick={{ fill: '#94a3b8', fontSize: 11 }} />
                 <Tooltip {...customTooltip} />
                 <Bar dataKey="count" fill="#f59e0b" radius={[6, 6, 0, 0]} />
@@ -358,7 +374,13 @@ export function DashboardCharts({ charts }: ChartProps) {
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={charts.backupHabits} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
-                <XAxis dataKey="name" stroke="#475569" tick={{ fill: '#94a3b8', fontSize: 10 }} />
+                <XAxis
+                  dataKey="name"
+                  stroke="#475569"
+                  tick={{ fill: '#94a3b8', fontSize: 10 }}
+                  interval={0}
+                  tickFormatter={(val) => (val === 'Yes, regularly' ? 'Regularly' : val)}
+                />
                 <YAxis allowDecimals={false} stroke="#475569" tick={{ fill: '#94a3b8', fontSize: 11 }} />
                 <Tooltip {...customTooltip} />
                 <Bar dataKey="count" fill="#10b981" radius={[6, 6, 0, 0]} />

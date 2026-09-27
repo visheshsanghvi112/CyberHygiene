@@ -61,21 +61,21 @@ export default function AdminAnalysisPage() {
         </div>
 
         {/* Dataset Filter Selector */}
-        <div className="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-slate-800 shadow-2xs w-full sm:w-auto justify-between sm:justify-start">
-          <Filter className="w-4 h-4 text-slate-400 ml-2 hidden xs:block shrink-0" />
+        <div className="flex items-center gap-1 bg-slate-900/90 p-1 sm:p-1.5 rounded-xl border border-slate-800 shadow-lg backdrop-blur-md w-full sm:w-auto overflow-x-auto touch-scroll">
+          <Filter className="w-3.5 h-3.5 text-slate-400 ml-1.5 hidden xs:block shrink-0" />
           {(['all', 'real', 'demo'] as const).map((mode) => (
             <button
               key={mode}
               onClick={() => setFilter(mode)}
-              className={`flex-1 sm:flex-initial px-3 py-1.5 rounded-lg text-xs font-medium transition-all text-center ${
+              className={`flex-1 sm:flex-none px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap text-center ${
                 filter === mode
-                  ? 'bg-slate-900 text-white shadow-2xs'
-                  : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800'
+                  ? 'bg-gradient-to-r from-indigo-600 to-sky-600 text-white shadow-md shadow-indigo-600/30'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
               }`}
             >
-              {mode === 'all' && 'All Records'}
+              {mode === 'all' && 'All Assessments'}
               {mode === 'real' && 'Real Only'}
-              {mode === 'demo' && 'Demo Only'}
+              {mode === 'demo' && 'Demo Dataset'}
             </button>
           ))}
         </div>
@@ -83,8 +83,8 @@ export default function AdminAnalysisPage() {
 
       {loading && (
         <div className="py-20 text-center">
-          <div className="w-8 h-8 border-3 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <p className="text-sm text-slate-400">Computing analytics metrics and hypothesis tests...</p>
+          <div className="w-8 h-8 border-3 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <p className="text-sm text-slate-400 font-mono">Computing analytics metrics and hypothesis tests...</p>
         </div>
       )}
 
@@ -100,7 +100,7 @@ export default function AdminAnalysisPage() {
           <div className="intel-card p-4 sm:p-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3 mb-3">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-indigo-600 shrink-0" />
+                <ShieldCheck className="w-4 h-4 text-indigo-400 shrink-0" />
                 <h3 className="font-bold text-slate-100 text-sm">
                   Cyber Hygiene Score Methodology (0–100 Scale)
                 </h3>
@@ -361,7 +361,7 @@ export default function AdminAnalysisPage() {
 
                 <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-xs text-slate-300 leading-relaxed space-y-2">
                   <div className="font-bold text-slate-100 flex items-center gap-1.5">
-                    <BookOpen className="w-4 h-4 text-indigo-600 shrink-0" />
+                    <BookOpen className="w-4 h-4 text-indigo-400 shrink-0" />
                     <span>Statistical Interpretation:</span>
                   </div>
                   <blockquote className="italic border-l-2 border-indigo-400 pl-3 text-slate-400">

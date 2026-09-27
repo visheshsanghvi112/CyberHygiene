@@ -66,21 +66,21 @@ export default function ReportsPage() {
 
         <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
           {/* Dataset Filter */}
-          <div className="flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-800 shadow-2xs w-full xs:w-auto justify-between xs:justify-start">
+          <div className="flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-800 shadow-lg backdrop-blur-md w-full xs:w-auto overflow-x-auto touch-scroll">
             <Filter className="w-3.5 h-3.5 text-slate-400 ml-1.5 hidden xs:block shrink-0" />
             {(['all', 'real', 'demo'] as const).map((mode) => (
               <button
                 key={mode}
                 onClick={() => setFilter(mode)}
-                className={`flex-1 xs:flex-initial px-2.5 py-1 rounded-lg text-xs font-medium transition-all text-center ${
+                className={`flex-1 xs:flex-initial px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap text-center ${
                   filter === mode
-                    ? 'bg-slate-900 text-white shadow-2xs'
-                    : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800'
+                    ? 'bg-gradient-to-r from-indigo-600 to-sky-600 text-white shadow-md shadow-indigo-600/30'
+                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
                 }`}
               >
-                {mode === 'all' && 'All'}
+                {mode === 'all' && 'All Assessments'}
                 {mode === 'real' && 'Real Only'}
-                {mode === 'demo' && 'Demo'}
+                {mode === 'demo' && 'Demo Dataset'}
               </button>
             ))}
           </div>
@@ -88,7 +88,7 @@ export default function ReportsPage() {
           <div className="flex items-center gap-2 w-full xs:w-auto">
             <button
               onClick={handlePrint}
-              className="flex-1 xs:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-medium text-xs shadow-2xs transition-colors"
+              className="flex-1 xs:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-medium text-xs shadow-sm transition-colors"
             >
               <Printer className="w-3.5 h-3.5" />
               <span>Print / PDF</span>
@@ -97,7 +97,7 @@ export default function ReportsPage() {
             <a
               href={`/api/admin/export?type=summary&filter=${filter}`}
               download
-              className="flex-1 xs:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-sky-600 hover:from-indigo-500 hover:to-sky-500 text-white shadow-md shadow-indigo-600/25 font-medium text-xs shadow-2xs transition-colors"
+              className="flex-1 xs:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-sky-600 hover:from-indigo-500 hover:to-sky-500 text-white shadow-md shadow-indigo-600/25 font-medium text-xs transition-colors"
             >
               <Download className="w-3.5 h-3.5" />
               <span>Export CSV</span>
@@ -108,8 +108,8 @@ export default function ReportsPage() {
 
       {loading && (
         <div className="py-24 text-center">
-          <div className="w-8 h-8 border-3 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <p className="text-sm text-slate-400">Compiling executive assessment report...</p>
+          <div className="w-8 h-8 border-3 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <p className="text-sm text-slate-400 font-mono">Compiling executive assessment report...</p>
         </div>
       )}
 

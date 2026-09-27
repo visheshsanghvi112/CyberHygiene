@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   ShieldCheck,
   BarChart3,
@@ -16,14 +16,28 @@ import {
   Menu,
   X,
   LogIn,
+  LogOut,
   ChevronRight,
 } from 'lucide-react';
 
 export function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const isSurvey = pathname.startsWith('/survey');
+  const isAdminPortal = pathname.startsWith('/admin') && pathname !== '/admin/login';
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/admin/auth', { method: 'DELETE' });
+    } catch {
+      // ignore
+    }
+    setMobileMenuOpen(false);
+    router.push('/admin/login');
+    router.refresh();
+  };
 
   // Close mobile menu whenever route changes
   useEffect(() => {
@@ -104,15 +118,17 @@ export function Navbar() {
           <Link
             href="/"
             onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2.5 sm:gap-3 group shrink-0 min-w-0"
+            className="flex items-center gap-2 sm:gap-2.5 group shrink min-w-0"
           >
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-indigo-500 via-indigo-600 to-sky-600 flex items-center justify-center text-white shadow-lg shadow-indigo-600/25 transition-all group-hover:scale-105 group-hover:shadow-indigo-500/40 shrink-0">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-indigo-500 via-indigo-600 to-sky-600 flex items-center justify-center text-white shadow-lg shadow-indigo-600/25 transition-all group-hover:scale-105 group-hover:shadow-indigo-500/40 shrink-0">
               <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div className="min-w-0">
               <div className="font-bold text-slate-100 text-xs sm:text-base leading-tight tracking-tight flex items-center gap-1.5 sm:gap-2">
-                <span className="truncate">CyberHygiene Intel</span>
-                <span className="inline-flex items-center gap-1 text-[9px] sm:text-[10px] uppercase font-mono px-1.5 sm:px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 shrink-0">
+                <span className="truncate">
+                  CyberHygiene<span className="hidden xs:inline"> Intel</span>
+                </span>
+                <span className="hidden sm:inline-flex items-center gap-1 text-[9px] sm:text-[10px] uppercase font-mono px-1.5 sm:px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 shrink-0">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   CIA v1.0
                 </span>
@@ -245,16 +261,28 @@ export function Navbar() {
             >
               <Info className="w-3.5 h-3.5" />
             </Link>
+
+            {isAdminPortal && (
+              <button
+                type="button"
+                onClick={handleLogout}
+                title="Sign out of Admin Portal"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-rose-400/90 hover:text-rose-300 hover:bg-rose-500/10 border border-rose-500/20 transition-all ml-1 shadow-xs"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span className="hidden xl:inline">Sign Out</span>
+              </button>
+            )}
           </nav>
 
           {/* Mobile Actions: Direct Assessment button + Hamburger Menu Button (< lg) */}
-          <div className="flex lg:hidden items-center gap-2">
+          <div className="flex lg:hidden items-center gap-1.5 sm:gap-2 shrink-0">
             <Link
               href="/survey"
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-indigo-600 to-sky-600 text-white shadow-md shadow-indigo-600/20 active:scale-95 transition-transform"
+              className="inline-flex items-center justify-center gap-1 px-2.5 py-1.5 sm:px-3 sm:py-2 min-h-[36px] sm:min-h-[38px] rounded-xl text-xs font-semibold bg-gradient-to-r from-indigo-600 to-sky-600 text-white shadow-md shadow-indigo-600/20 active:scale-95 transition-transform"
             >
-              <ClipboardCheck className="w-3.5 h-3.5" />
-              <span className="hidden xs:inline">Survey</span>
+              <ClipboardCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+              <span>Survey</span>
             </Link>
 
             <button
@@ -262,13 +290,13 @@ export function Navbar() {
               onClick={() => setMobileMenuOpen((prev) => !prev)}
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={mobileMenuOpen}
-              className={`w-10 h-10 rounded-xl flex items-center justify-center border transition-all ${
+              className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center border transition-all ${
                 mobileMenuOpen
                   ? 'bg-indigo-600/20 border-indigo-500 text-indigo-300'
-                  : 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white hover:bg-slate-850'
+                  : 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800'
               }`}
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
             </button>
           </div>
         </div>
@@ -319,7 +347,7 @@ export function Navbar() {
                     <div>
                       <div className="text-xs font-bold text-white flex items-center gap-2">
                         <span>Take Assessment</span>
-                        <span className="text-[9px] uppercase font-mono px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                        <span className="text-[9px] uppercase font-mono px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
                           Active
                         </span>
                       </div>
@@ -392,25 +420,44 @@ export function Navbar() {
                   <ChevronRight className="w-4 h-4 text-slate-600" />
                 </Link>
 
-                <Link
-                  href="/admin/login"
-                  className={`flex items-center justify-between p-3 rounded-xl border transition-all ${
-                    pathname === '/admin/login'
-                      ? 'bg-indigo-600/20 border-indigo-500/40 text-indigo-200'
-                      : 'bg-slate-900/60 border-slate-800/80 text-slate-300 hover:bg-slate-800'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 flex items-center justify-center">
-                      <LogIn className="w-4 h-4" />
+                {isAdminPortal ? (
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="w-full flex items-center justify-between p-3 rounded-xl border border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 transition-all text-left"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center">
+                        <LogOut className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold">Sign Out</div>
+                        <div className="text-[11px] text-rose-400/80">End administrative session</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="text-xs font-semibold">Admin Sign In</div>
-                      <div className="text-[11px] text-slate-500">Access researcher gateway</div>
+                    <ChevronRight className="w-4 h-4 text-rose-400/60" />
+                  </button>
+                ) : (
+                  <Link
+                    href="/admin/login"
+                    className={`flex items-center justify-between p-3 rounded-xl border transition-all ${
+                      pathname === '/admin/login'
+                        ? 'bg-indigo-600/20 border-indigo-500/40 text-indigo-200'
+                        : 'bg-slate-900/60 border-slate-800/80 text-slate-300 hover:bg-slate-800'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 flex items-center justify-center">
+                        <LogIn className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold">Admin Sign In</div>
+                        <div className="text-[11px] text-slate-500">Access researcher gateway</div>
+                      </div>
                     </div>
-                  </div>
-                  <ChevronRight className="w-4 h-4 text-slate-600" />
-                </Link>
+                    <ChevronRight className="w-4 h-4 text-slate-600" />
+                  </Link>
+                )}
               </div>
             </div>
 

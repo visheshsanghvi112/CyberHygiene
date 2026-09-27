@@ -102,7 +102,7 @@ export default function SettingsPage() {
 
         <button
           onClick={handleLogout}
-          className="self-start sm:self-auto inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-700 text-slate-300 hover:bg-slate-900/60 font-medium text-xs transition-colors shadow-2xs"
+          className="self-start sm:self-auto inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-700 text-slate-300 hover:bg-slate-900/60 font-medium text-xs transition-colors shadow-sm"
         >
           <LogOut className="w-3.5 h-3.5" />
           <span>Sign Out</span>
@@ -111,7 +111,7 @@ export default function SettingsPage() {
 
       {actionMessage && (
         <div className="mb-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
+          <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
           <span>{actionMessage}</span>
         </div>
       )}
@@ -133,10 +133,11 @@ export default function SettingsPage() {
             </div>
             <button
               onClick={fetchStats}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors"
+              className="w-9 h-9 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors flex items-center justify-center"
               title="Refresh"
+              aria-label="Refresh records status"
             >
-              <RefreshCw className="w-3.5 h-3.5" />
+              <RefreshCw className="w-4 h-4" />
             </button>
           </div>
 

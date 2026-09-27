@@ -15,6 +15,8 @@ import {
   Wifi,
   Sparkles,
   RotateCcw,
+  Copy,
+  Check,
 } from 'lucide-react';
 import {
   AGE_GROUPS,
@@ -25,6 +27,7 @@ import {
 
 export default function SurveyPage() {
   const [currentStep, setCurrentStep] = useState(1);
+  const [copiedId, setCopiedId] = useState(false);
   const totalSteps = 7;
 
   // Form State
@@ -247,8 +250,10 @@ export default function SurveyPage() {
   }) => (
     <button
       type="button"
+      role="radio"
+      aria-checked={selected}
       onClick={onClick}
-      className={`w-full text-left p-3 sm:p-4 rounded-xl border transition-all flex items-start justify-between gap-2.5 sm:gap-3 min-h-[44px] ${
+      className={`w-full text-left p-3 sm:p-4 rounded-xl border transition-all flex items-start justify-between gap-2.5 sm:gap-3 min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 ${
         selected
           ? 'bg-indigo-600/20 border-indigo-500 text-white ring-1 ring-indigo-500/50 shadow-md shadow-indigo-950/40'
           : 'bg-slate-900/60 border-slate-800/90 hover:border-slate-700 hover:bg-slate-800/50 text-slate-200'
@@ -290,9 +295,32 @@ export default function SurveyPage() {
 
           {/* Anonymous Receipt */}
           <div className="mt-6 p-3.5 sm:p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 text-left font-mono shadow-inner">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <span className="text-slate-400">Record ID:</span>
-              <span className="font-semibold text-indigo-300 break-all">{submissionResult.responseId}</span>
+              <div className="flex items-center gap-2">
+                <span className="font-semibold text-indigo-300 break-all">{submissionResult.responseId}</span>
+                {submissionResult.responseId && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (submissionResult.responseId) {
+                        navigator.clipboard.writeText(submissionResult.responseId);
+                        setCopiedId(true);
+                        setTimeout(() => setCopiedId(false), 2000);
+                      }
+                    }}
+                    title="Copy Anonymous Record ID"
+                    aria-label="Copy Anonymous Record ID"
+                    className="p-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition-colors shrink-0"
+                  >
+                    {copiedId ? (
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    ) : (
+                      <Copy className="w-3.5 h-3.5" />
+                    )}
+                  </button>
+                )}
+              </div>
             </div>
             <div className="mt-2 pt-2 border-t border-slate-800 flex items-center justify-between">
               <span className="text-slate-400">Privacy Status:</span>

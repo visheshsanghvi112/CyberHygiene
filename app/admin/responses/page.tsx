@@ -110,6 +110,20 @@ export default function AdminResponsesPage() {
     fetchResponses();
   }, [fetchResponses]);
 
+  // Lock body scroll and listen for Escape key when inspection modal is open
+  useEffect(() => {
+    if (!selectedRecord) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedRecord(null);
+    };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedRecord]);
+
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setPage(1);
@@ -149,14 +163,14 @@ export default function AdminResponsesPage() {
         <div className="flex flex-wrap items-center gap-2">
           <Link
             href="/admin/settings"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900/90 hover:bg-slate-900/60 text-slate-300 text-xs font-medium transition-colors shadow-2xs"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900/90 hover:bg-slate-900/60 text-slate-300 text-xs font-medium transition-colors shadow-sm"
           >
             <Database className="w-3.5 h-3.5 text-slate-400" />
             <span>Data Management Hub</span>
           </Link>
           <Link
             href="/admin/export"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium transition-colors shadow-2xs"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium transition-colors shadow-sm"
           >
             <FileSpreadsheet className="w-3.5 h-3.5" />
             <span>Export CSV</span>
@@ -193,7 +207,7 @@ export default function AdminResponsesPage() {
                 setRespondentType(e.target.value);
                 setPage(1);
               }}
-              className="w-full py-2 px-2.5 text-xs rounded-lg border border-slate-700 bg-slate-900/90 focus:outline-none focus:ring-1 focus:ring-indigo-600"
+              className="w-full py-2 px-2.5 text-xs rounded-lg border border-slate-700 bg-slate-900/90 text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
             >
               <option value="">All Cohorts</option>
               <option value="Student">Students</option>
@@ -209,7 +223,7 @@ export default function AdminResponsesPage() {
                 setScoreCategory(e.target.value);
                 setPage(1);
               }}
-              className="w-full py-2 px-2.5 text-xs rounded-lg border border-slate-700 bg-slate-900/90 focus:outline-none focus:ring-1 focus:ring-indigo-600"
+              className="w-full py-2 px-2.5 text-xs rounded-lg border border-slate-700 bg-slate-900/90 text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
             >
               <option value="">All Scores</option>
               <option value="Strong">Strong (80–100)</option>
@@ -227,7 +241,7 @@ export default function AdminResponsesPage() {
                 setMfaFilter(e.target.value);
                 setPage(1);
               }}
-              className="w-full py-2 px-2.5 text-xs rounded-lg border border-slate-700 bg-slate-900/90 focus:outline-none focus:ring-1 focus:ring-indigo-600"
+              className="w-full py-2 px-2.5 text-xs rounded-lg border border-slate-700 bg-slate-900/90 text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
             >
               <option value="">All MFA Status</option>
               <option value="enabled">MFA Enabled</option>
@@ -243,7 +257,7 @@ export default function AdminResponsesPage() {
                 setTrainingFilter(e.target.value);
                 setPage(1);
               }}
-              className="w-full py-2 px-2.5 text-xs rounded-lg border border-slate-700 bg-slate-900/90 focus:outline-none focus:ring-1 focus:ring-indigo-600"
+              className="w-full py-2 px-2.5 text-xs rounded-lg border border-slate-700 bg-slate-900/90 text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
             >
               <option value="">All Training</option>
               <option value="yes">Training Completed</option>
@@ -259,7 +273,7 @@ export default function AdminResponsesPage() {
                 setFilter(e.target.value as 'all' | 'real' | 'demo');
                 setPage(1);
               }}
-              className="w-full py-2 px-2.5 text-xs rounded-lg border border-slate-700 bg-slate-900/90 focus:outline-none focus:ring-1 focus:ring-indigo-600 font-medium"
+              className="w-full py-2 px-2.5 text-xs rounded-lg border border-slate-700 bg-slate-900/90 text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 font-medium"
             >
               <option value="all">All Data Sources</option>
               <option value="real">Real Records Only</option>
@@ -413,7 +427,7 @@ export default function AdminResponsesPage() {
                 </tr>
               ) : (
                 records.map((r) => (
-                  <tr key={r.id} className="hover:bg-slate-900/60/70 transition-colors">
+                  <tr key={r.id} className="hover:bg-slate-800/40 transition-colors">
                     {/* Assessment ID */}
                     <td className="py-3 px-3 font-mono text-[11px] text-indigo-400 font-medium">
                       {r.id.substring(0, 10)}...
@@ -456,7 +470,7 @@ export default function AdminResponsesPage() {
                     <td className="py-3 px-3 text-slate-400">
                       {r.mfaUsage.startsWith('Yes') ? (
                         <span className="inline-flex items-center gap-1 text-emerald-400 font-medium text-[11px]">
-                          <CheckCircle className="w-3 h-3 text-emerald-600" />
+                          <CheckCircle className="w-3 h-3 text-emerald-400" />
                           <span>Enabled</span>
                         </span>
                       ) : (
@@ -490,9 +504,9 @@ export default function AdminResponsesPage() {
                     <td className="py-3 px-3 text-right">
                       <button
                         onClick={() => setSelectedRecord(r)}
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-800 hover:bg-indigo-500/10 hover:text-indigo-400 text-slate-300 text-xs font-medium transition-colors"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-indigo-600/10 hover:bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 text-xs font-semibold transition-colors"
                       >
-                        <Eye className="w-3 h-3" />
+                        <Eye className="w-3.5 h-3.5" />
                         <span>Inspect</span>
                       </button>
                     </td>
@@ -535,20 +549,30 @@ export default function AdminResponsesPage() {
 
       {/* Record Inspection Modal */}
       {selectedRecord && (
-        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-inspection-title"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setSelectedRecord(null);
+          }}
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+        >
           <div className="intel-card-elevated max-w-2xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-6 md:p-8 shadow-2xl border border-slate-700/80">
             <div className="flex items-start justify-between border-b border-slate-800/80 pb-4 mb-4 sm:mb-6 gap-3">
               <div className="min-w-0">
                 <span className="text-xs font-bold uppercase tracking-wider text-indigo-400">
                   Assessment Audit Inspection
                 </span>
-                <h3 className="text-base sm:text-lg font-bold text-slate-100 mt-1">
+                <h3 id="modal-inspection-title" className="text-base sm:text-lg font-bold text-slate-100 mt-1">
                   ID: <span className="font-mono text-xs sm:text-sm text-indigo-400 font-normal break-all">{selectedRecord.id}</span>
                 </h3>
               </div>
               <button
+                type="button"
                 onClick={() => setSelectedRecord(null)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-300 hover:bg-slate-800 shrink-0"
+                aria-label="Close modal"
+                className="w-9 h-9 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 flex items-center justify-center shrink-0 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>

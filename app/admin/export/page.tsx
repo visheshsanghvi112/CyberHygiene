@@ -29,19 +29,19 @@ export default function AdminExportPage() {
         </div>
 
         {/* Filter Selector */}
-        <div className="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-slate-800 shadow-2xs w-full sm:w-auto justify-between sm:justify-start">
-          <Filter className="w-4 h-4 text-slate-400 ml-2 hidden xs:block shrink-0" />
+        <div className="flex items-center gap-1 bg-slate-900/90 p-1 sm:p-1.5 rounded-xl border border-slate-800 shadow-lg backdrop-blur-md w-full sm:w-auto overflow-x-auto touch-scroll">
+          <Filter className="w-3.5 h-3.5 text-slate-400 ml-1.5 hidden xs:block shrink-0" />
           {(['all', 'real', 'demo'] as const).map((mode) => (
             <button
               key={mode}
               onClick={() => setFilter(mode)}
-              className={`flex-1 sm:flex-initial px-3 py-1.5 rounded-lg text-xs font-medium transition-all text-center ${
+              className={`flex-1 sm:flex-none px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap text-center ${
                 filter === mode
-                  ? 'bg-slate-900 text-white shadow-2xs'
-                  : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800'
+                  ? 'bg-gradient-to-r from-indigo-600 to-sky-600 text-white shadow-md shadow-indigo-600/30'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
               }`}
             >
-              {mode === 'all' && 'All Records'}
+              {mode === 'all' && 'All Assessments'}
               {mode === 'real' && 'Real Only'}
               {mode === 'demo' && 'Demo Dataset'}
             </button>

@@ -82,21 +82,21 @@ export default function RiskInsightsPage() {
         </div>
 
         {/* Dataset Filter */}
-        <div className="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-slate-800 shadow-2xs w-full sm:w-auto justify-between sm:justify-start">
-          <Filter className="w-4 h-4 text-slate-400 ml-2 hidden xs:block shrink-0" />
+        <div className="flex items-center gap-1 bg-slate-900/90 p-1 sm:p-1.5 rounded-xl border border-slate-800 shadow-lg backdrop-blur-md w-full sm:w-auto overflow-x-auto touch-scroll">
+          <Filter className="w-3.5 h-3.5 text-slate-400 ml-1.5 hidden xs:block shrink-0" />
           {(['all', 'real', 'demo'] as const).map((mode) => (
             <button
               key={mode}
               onClick={() => setFilter(mode)}
-              className={`flex-1 sm:flex-initial px-3 py-1.5 rounded-lg text-xs font-medium transition-all text-center ${
+              className={`flex-1 sm:flex-none px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap text-center ${
                 filter === mode
-                  ? 'bg-slate-900 text-white shadow-2xs'
-                  : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800'
+                  ? 'bg-gradient-to-r from-indigo-600 to-sky-600 text-white shadow-md shadow-indigo-600/30'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
               }`}
             >
-              {mode === 'all' && 'All Records'}
+              {mode === 'all' && 'All Assessments'}
               {mode === 'real' && 'Real Only'}
-              {mode === 'demo' && 'Demo Only'}
+              {mode === 'demo' && 'Demo Dataset'}
             </button>
           ))}
         </div>
@@ -104,8 +104,8 @@ export default function RiskInsightsPage() {
 
       {loading && (
         <div className="py-24 text-center">
-          <div className="w-8 h-8 border-3 border-amber-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <p className="text-sm text-slate-400">Evaluating domain vulnerability indexes...</p>
+          <div className="w-8 h-8 border-3 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <p className="text-sm text-slate-400 font-mono">Evaluating domain vulnerability indexes...</p>
         </div>
       )}
 
@@ -189,7 +189,7 @@ export default function RiskInsightsPage() {
                           <span className="font-bold text-slate-100">{uniquePwd}%</span>
                         </div>
                         <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                          <div className="bg-blue-600 h-full rounded-full" style={{ width: `${uniquePwd}%` }} />
+                          <div className="bg-gradient-to-r from-sky-500 to-indigo-500 h-full rounded-full" style={{ width: `${uniquePwd}%` }} />
                         </div>
                         <div className="text-[11px] text-slate-400 pt-1">
                           Estimated vulnerable: <strong>{atRiskCount} respondents</strong> reuse passwords across accounts.
@@ -230,7 +230,7 @@ export default function RiskInsightsPage() {
                           <span className="font-bold text-slate-100">{mfaRate}%</span>
                         </div>
                         <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                          <div className="bg-emerald-600 h-full rounded-full" style={{ width: `${mfaRate}%` }} />
+                          <div className="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full" style={{ width: `${mfaRate}%` }} />
                         </div>
                         <div className="text-[11px] text-slate-400 pt-1">
                           Faculty MFA compliance: <strong>{report.facultyMetrics.mfaAdoptionRate}%</strong> vs. Students: <strong>{report.studentMetrics.mfaAdoptionRate}%</strong>.
@@ -271,10 +271,10 @@ export default function RiskInsightsPage() {
                           <span className="font-bold text-slate-100">{deviceLock}%</span>
                         </div>
                         <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                          <div className="bg-indigo-600 h-full rounded-full" style={{ width: `${deviceLock}%` }} />
+                          <div className="bg-gradient-to-r from-indigo-500 to-purple-500 h-full rounded-full" style={{ width: `${deviceLock}%` }} />
                         </div>
                         <div className="text-[11px] text-slate-400 pt-1">
-                          Operating system prompt patching rate: <strong>{getRiskDomain('Operating System')} %</strong>.
+                          Operating system prompt patching rate: <strong>{getRiskDomain('Operating System')}%</strong>.
                         </div>
                       </div>
                     </div>
@@ -312,7 +312,7 @@ export default function RiskInsightsPage() {
                           <span className="font-bold text-slate-100">{linkVerify}%</span>
                         </div>
                         <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                          <div className="bg-amber-600 h-full rounded-full" style={{ width: `${linkVerify}%` }} />
+                          <div className="bg-gradient-to-r from-amber-500 to-yellow-400 h-full rounded-full" style={{ width: `${linkVerify}%` }} />
                         </div>
                         <div className="text-[11px] text-slate-400 pt-1">
                           High self-rated phishing confidence: <strong>{report.studentMetrics.highPhishingConfidenceRate}%</strong>.
@@ -353,10 +353,10 @@ export default function RiskInsightsPage() {
                           <span className="font-bold text-slate-100">{wifiCare}%</span>
                         </div>
                         <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                          <div className="bg-cyan-600 h-full rounded-full" style={{ width: `${wifiCare}%` }} />
+                          <div className="bg-gradient-to-r from-sky-400 to-cyan-400 h-full rounded-full" style={{ width: `${wifiCare}%` }} />
                         </div>
                         <div className="text-[11px] text-slate-400 pt-1">
-                          HTTPS padlock verification rate: <strong>{getRiskDomain('HTTPS')} %</strong>.
+                          HTTPS padlock verification rate: <strong>{getRiskDomain('HTTPS')}%</strong>.
                         </div>
                       </div>
                     </div>
@@ -395,7 +395,7 @@ export default function RiskInsightsPage() {
                           <span className="font-bold text-rose-400">{backupRate}%</span>
                         </div>
                         <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                          <div className="bg-rose-600 h-full rounded-full" style={{ width: `${backupRate}%` }} />
+                          <div className="bg-gradient-to-r from-rose-500 to-red-400 h-full rounded-full" style={{ width: `${backupRate}%` }} />
                         </div>
                         <div className="text-[11px] text-rose-300 pt-1">
                           Vulnerable to ransomware/loss: <strong>{atRiskCount} respondents ({(100 - backupRate).toFixed(1)}%)</strong>.
